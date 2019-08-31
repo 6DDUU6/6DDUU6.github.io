@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>主页</title>
+	<meta charset="utf-8">
+	<style type="text/css">
+		body{
+			margin:0px 0px;
+		}
+		.list{
+			background-color:#66ccff;
+			list-style:none;
+			font-size:0px;
+			padding:0px 470px;
+		}
+		.list li{
+			display:inline-block;
+			border-right:1px solid #000000;
+			border-left:1px solid #000000; 
+			padding:5px 20px;
+			font-size:20px;
+			margin-right:-1px;
+		}
+		.list li a{
+			font-size:20px;
+			text-decoration:none;
+			text-align:center;
+		}
+		.one{
+			margin:50px;
+			border:20px solid green;
+			padding:20px;
+		}
+		.one p{
+			text-align:center;
+		}
+		.one iframe{
+			margin-left:80px; 
+		}
+	</style>
+</head>
+<body>
+	<ul class="list">
+		<li><a href="#">one</a></li>
+		<li><a href="#">two</a></li>
+		<li><a href="#">three</a></li>
+		<li><a href="#">four</a></li>
+		<li><a href="#">five</a></li>
+	</ul>
+	<a href="#dudu">跳转p标签</a>
+	<div class="one">
+		<p>This is a box</p>
+		<br \>
+		<p>
+			<a href="http://www.baidu.com" target="url">跳转百度</a>
+			<a href="http://www.qq.com" target="url">跳转扣扣</a>
+		</p>
+		<iframe src="http://www.baidu.com" name="url" width="1024" height="600"></iframe>
+
+		<p id="dudu">
+			嘟嘟嘟嘟嘟嘟嘟嘟嘟嘟嘟嘟嘟嘟嘟嘟嘟嘟嘟嘟嘟嘟
+		</p>
+	</div>
+</body>
+</html>

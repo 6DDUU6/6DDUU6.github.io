@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>⭐无极星空🌌</title>
+	<meta charset="utf-8">
+	<!-- 鼠标特效js -->
+	<script src="js/jquery.min.js"></script>
+	<style type="text/css">
+	body {margin:0 auto;overflow:hidden;} 
+			
+
+
+		.all{
+			margin:0 auto;
+			width:100%;
+			height:640px;
+			background-color:#00;
+			position:relative;
+			}
+		.all canvas {
+			width:100%;height:auto/*默认全屏显示 可自己设置高度640px*/;
+			display:inline-block;vertical-align:baseline;
+			position:absolute;
+			z-index:-1;
+			}
+		.all .menu{
+			width:804px;
+			height:auto;
+			position:absolute;
+			z-index:30;
+			/*top:420px;*/
+			left: 50%;
+			margin-left: -380px;
+		}
+		.all .menu img{
+			float:left;
+		}
+		.all .menu a{
+			text-decoration:none;
+			background:url(img/nav_gv.png) repeat 0px 0px;
+			width: 130px;
+			height: 43px;
+			display: block;
+			text-align:center;		/*水平居中*/
+			line-height:43px;  /*上下居中*/
+			cursor:pointer;
+			float:left;/*左浮动*/
+			margin:0px 2px 0px 2px;
+			font:18px/43px 'microsoft yahei'; color:#66ccff;
+		}
+		.all .menu a:hover{
+			background:url(img/nav_gv.png) repeat 0px -43px; 
+			color:#1d7eb8;
+			-webkit-box-shadow: 0 0 6px #1d7eb8;
+			transition-duration: 0.5s;
+		}/*鼠标移动到按钮时上的动画*/
+	</style>
+</head>
+<body>
+
+	<div class="all">
+		<div class="menu">
+			<img src="img/logo.jpg" width="43" height="43">
+			<a href="#">按钮1</a>
+			<a href="#">按钮2</a>
+			<a href="#">按钮3</a>
+			<a href="#">按钮4</a>
+			<a href="#">按钮5</a>
+		</div>
+		<div>
+			<h1>登录</h1>
+			<form>
+				<div>
+					<label>用户名：</label>
+					<input type="text" name="user">
+				</div>
+				<div>
+					<label>密码：</label>
+					<input type="password" name="password">
+				</div>
+				<div>
+					<label>验证码：</label>
+					<input type="text" name="check">
+				</div>
+			</form>
+		</div>
+		<canvas id="canvas" width="1366" height="608"></canvas>
+		<script>
+	//闪瞎狗眼酷炫到爆炸的特效
+			"use strict";
+			var canvas = document.getElementById('canvas'),
+			  ctx = canvas.getContext('2d'),
+			  w = canvas.width = window.innerWidth,
+			  h = canvas.height = window.innerHeight,
+
+			  hue = 217,
+			  stars = [],
+			  count = 0,
+			  maxStars = 1500;//MAX不能过1600，初锦说影响感官体验
+
+			var canvas2 = document.createElement('canvas'),
+			  ctx2 = canvas2.getContext('2d');
+			canvas2.width = 100;
+			canvas2.height = 100;
+			var half = canvas2.width / 2,
+			  gradient2 = ctx2.createRadialGradient(half, half, 0, half, half, half);
+			gradient2.addColorStop(0.025, '#CCC');
+			gradient2.addColorStop(0.1, 'hsl(' + hue + ', 61%, 33%)');
+			gradient2.addColorStop(0.25, 'hsl(' + hue + ', 64%, 6%)');
+			gradient2.addColorStop(1, 'transparent');
+
+			ctx2.fillStyle = gradient2;
+			ctx2.beginPath();
+			ctx2.arc(half, half, half, 0, Math.PI * 2);
+			ctx2.fill();
+
+			// End cache
+
+			function random(min, max) {
+			  if (arguments.length < 2) {
+			    max = min;
+			    min = 0;
+			  }
+
+			  if (min > max) {
+			    var hold = max;
+			    max = min;
+			    min = hold;
+			  }
+
+			  return Math.floor(Math.random() * (max - min + 1)) + min;
+			}
+
+			function maxOrbit(x, y) {
+			  var max = Math.max(x, y),
+			    diameter = Math.round(Math.sqrt(max * max + max * max));
+			  return diameter / 2;
+			  //粒子移动范围MAX最大3，
+			}
+
+			var Star = function() {
+
+			  this.orbitRadius = random(maxOrbit(w, h));
+			  this.radius = random(60, this.orbitRadius) / 8; 
+			  //粒子体型大小
+			  this.orbitX = w / 2;
+			  this.orbitY = h / 2;
+			  this.timePassed = random(0, maxStars);
+			  this.speed = random(this.orbitRadius) / 300000; //初始值为80000
+			  //粒子飙车速度
+			  this.alpha = random(2, 10) / 10;
+
+			  count++;
+			  stars[count] = this;
+			}
+
+			Star.prototype.draw = function() {
+			  var x = Math.sin(this.timePassed) * this.orbitRadius + this.orbitX,
+			    y = Math.cos(this.timePassed) * this.orbitRadius + this.orbitY,
+			    twinkle = random(10);
+
+			  if (twinkle === 1 && this.alpha > 0) {
+			    this.alpha -= 0.05;
+			  } else if (twinkle === 2 && this.alpha < 1) {
+			    this.alpha += 0.05;
+			  }
+
+			  ctx.globalAlpha = this.alpha;
+			  ctx.drawImage(canvas2, x - this.radius / 2, y - this.radius / 2, this.radius, this.radius);
+			  this.timePassed += this.speed;
+			}
+
+			for (var i = 0; i < maxStars; i++) {
+			  new Star();
+			}
+
+			function animation() {
+			  ctx.globalCompositeOperation = 'source-over';
+			  ctx.globalAlpha = 0.5; //粒子尾部
+			  ctx.fillStyle = 'hsla(' + hue + ', 64%, 6%, 2)';
+			  ctx.fillRect(0, 0, w, h)
+
+			  ctx.globalCompositeOperation = 'lighter';
+			  for (var i = 1, l = stars.length; i < l; i++) {
+			    stars[i].draw();
+			  };
+
+			  window.requestAnimationFrame(animation);
+			}
+
+			animation();
+		</script>
+	</div>
+	<script type="text/javascript"> 
+/* 鼠标特效 */ 
+var a_idx = 0; 
+jQuery(document).ready(function($) { 
+    $("body").click(function(e) { 
+        var a = new Array("❤富强❤","❤民主❤","❤文明❤","❤和谐❤","❤自由❤","❤平等❤","❤公正❤","❤法治❤","❤爱国❤","❤敬业❤","❤诚信❤","❤友善❤"); 
+        var $i = $("<span></span>").text(a[a_idx]); 
+        a_idx = (a_idx + 1) % a.length; 
+        var x = e.pageX, 
+        y = e.pageY; 
+        $i.css({ 
+            "z-index": 999999999999999999999999999999999999999999999999999999999999999999999, 
+            "top": y - 20, 
+            "left": x, 
+            "position": "absolute", 
+            "font-weight": "bold", 
+            "color": "rgb("+~~(255*Math.random())+","+~~(255*Math.random())+","+~~(255*Math.random())+")" 
+        }); 
+        $("body").append($i); 
+        $i.animate({ 
+            "top": y - 180, 
+            "opacity": 0 
+        }, 
+        1500, 
+        function() { 
+            $i.remove(); 
+        }); 
+    }); 
+}); 
+</script>
+</body>
+</html>
