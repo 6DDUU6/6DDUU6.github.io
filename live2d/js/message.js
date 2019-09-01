@@ -31,6 +31,82 @@ $(document).on('copy', function (){
     showMessage('你都复制了些什么呀，转载要记得加上出处哦~~', 5000);
 });
 
+$('.waifu-tool .cl-home')
+    .click(function() {
+        window.location = window.location.protocol + '//' + window.location.hostname + '/'
+    });
+
+$('.nv .cl-nv')
+    .click(function() {
+        loadlive2d('live2d','https://6dduu6.github.io/live2d/model/kesshouban_v2/model.json');
+        showMessage('来自工作细胞的血小板~', 5000, true);
+    });
+$('.nv .cl-nv2')
+    .click(function() {
+        loadlive2d('live2d','https://6dduu6.github.io/live2d/Pio/model.json');
+        showMessage('来自药水工作室的pio酱~', 5000, true);
+    });
+$('.nv .cl-nv3')
+    .click(function() {
+        loadlive2d('live2d','https://6dduu6.github.io/live2d/model/Tia/index.json');
+        showMessage('Tia酱~', 5000, true);
+    });
+$('.nv .cl-nv4')
+    .click(function() {
+        loadlive2d('live2d','https://6dduu6.github.io/live2d/model/22/index.json');
+        showMessage('bilibili 22娘~', 5000, true);
+    });
+$('.nv .cl-nv5')
+    .click(function() {
+        loadlive2d('live2d','https://6dduu6.github.io/live2d/model/33/index.json');
+        showMessage('bilibili 33娘~', 5000, true);
+    });
+$('.nv .cl-nv6')
+    .click(function() {
+        loadlive2d('live2d','https://6dduu6.github.io/live2d/model/murakumo/index.json');
+        showMessage('murakumo酱~', 5000, true);
+    });
+$('.nv .cl-nv7')
+    .click(function() {
+        loadlive2d('live2d','https://6dduu6.github.io/live2d/model/kesshouban_v2/model.json');
+        showMessage('还是xxb~', 5000, true);
+    });
+
+$('.waifu-tool .cl-liaotianduihua')
+    .click(function() {
+        showHitokoto();
+    });
+
+$('.waifu-tool .cl-nvzhuangqunzi-1')
+    .click(function() {
+        loadRandModel();
+    });
+
+$('.waifu-tool .cl-github1')
+    .click(function() {
+        window.open('https://github.com/6DDUU6');
+    });
+
+$('.waifu-tool .cl-weixin')
+    .click(function() {
+        showMessage('人家不会告诉你微信号是<span style="font-size:16px;color:orange"> du04171218 </span>φ(>ω<*) ',
+            2000, true);
+    });
+
+$('.waifu-tool .cl-yincangbukejian')
+    .click(function() {
+        sessionStorage.setItem('waifu-dsiplay', 'none');
+        showMessage('愿你有一天能与重要的人重逢', 1300, true);
+        window.setTimeout(function() { $('.waifu').hide(); }, 1300);
+    });
+
+$('.waifu-tool .cl-paizhao')
+    .click(function() {
+        showMessage('照好了嘛，是不是很可爱喵？', 5000, true);
+        window.Live2D.captureName = 'Pio.png';
+        window.Live2D.captureFrame = true;
+    });
+
 function initTips(){
     $.ajax({
         cache: true,
