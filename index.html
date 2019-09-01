@@ -4,6 +4,7 @@
 	<title>⭐无极星空🌌</title>
 	<meta charset="utf-8">
 	<script src="js/jquery.min.js"></script>
+	<link rel="stylesheet" href="live2d/css/live2d.css" />
 	<style type="text/css">
 	body {margin:0 auto;overflow:hidden;} 
 		
@@ -68,6 +69,12 @@
 	</style>
 </head>
 <body>
+
+<div id="landlord">
+    <div class="message" style="opacity:0"></div>
+    <canvas id="live2d" width="280" height="250" class="live2d"></canvas>
+    <div class="hide-button">隐藏</div>
+</div>
 
 	<div class="all">
 		<div class="menu">
@@ -218,4 +225,15 @@ jQuery(document).ready(function($) {
 }); 
 </script>
 </body>
+<script type="text/javascript" src="https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script type="text/javascript">
+    var message_Path = 'https://6dduu6.github.io/live2d/'
+    var home_Path = 'https://6dduu6.github.io/'
+</script>
+<script type="text/javascript" src="http://calamus.wiki/calamus-live2d/demo1/live2d/js/live2d.js"></script>
+<script type="text/javascript" src="live2d/js/message.js"></script>
+<script type="text/javascript">
+    loadlive2d("live2d", "https://6dduu6.github.io/live2d/Pio/model.json");
+</script>
+
 </html>
