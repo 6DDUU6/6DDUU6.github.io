@@ -40,36 +40,43 @@ $('.nv .cl-nv')
     .click(function() {
         loadlive2d('live2d','https://6dduu6.github.io/live2d/model/kesshouban_v2/model.json');
         showMessage('来自工作细胞的血小板~', 5000, true);
+        chara = 'kesshouban_v2';
     });
 $('.nv .cl-nv2')
     .click(function() {
-        loadlive2d('live2d','https://6dduu6.github.io/live2d/Pio/model.json');
+        loadlive2d('live2d','https://6dduu6.github.io/live2d/model/pio/model0.json');
         showMessage('来自药水工作室的pio酱~', 5000, true);
+        chara = 'pio';
     });
 $('.nv .cl-nv3')
     .click(function() {
-        loadlive2d('live2d','https://6dduu6.github.io/live2d/model/Tia/index.json');
+        loadlive2d('live2d','https://6dduu6.github.io/live2d/model/tia/index.json');
         showMessage('Tia酱~', 5000, true);
+        chara = 'tia';
     });
 $('.nv .cl-nv4')
     .click(function() {
         loadlive2d('live2d','https://6dduu6.github.io/live2d/model/22/index.json');
         showMessage('bilibili 22娘~', 5000, true);
+        chara = '22';
     });
 $('.nv .cl-nv5')
     .click(function() {
         loadlive2d('live2d','https://6dduu6.github.io/live2d/model/33/index.json');
         showMessage('bilibili 33娘~', 5000, true);
+        chara = '33';
     });
 $('.nv .cl-nv6')
     .click(function() {
         loadlive2d('live2d','https://6dduu6.github.io/live2d/model/murakumo/index.json');
         showMessage('murakumo酱~', 5000, true);
+        chara = 'murakumo';
     });
 $('.nv .cl-nv7')
     .click(function() {
         loadlive2d('live2d','https://6dduu6.github.io/live2d/model/kesshouban_v2/model.json');
         showMessage('还是xxb~', 5000, true);
+        chara = 'kesshouban_v2';
     });
 
 $('.waifu-tool .cl-liaotianduihua')
@@ -211,3 +218,23 @@ function initLive2d (){
     })
 }
 initLive2d ();
+
+function loadRandModel() {
+    $.ajax({
+        cache: true,
+        url: `https://6dduu6.github.io/live2d/model/${chara}/index.json`,
+        dataType: "json",
+        success: function(result) {
+            
+            if (result.textures.length == 1 || chara == '22' || chara == '33') {
+                showMessage('人家还没有其他衣服呢', 3000, true);
+            } else {
+                showMessage('人家的新衣服好看喵', 3000, true);
+                var ram =Math.floor(Math.random()*result.textures.length)
+                console.log(ram)
+                loadlive2d('live2d',`https://6dduu6.github.io/live2d/model/${chara}/model${ram.toString()}.json`);
+            }
+            
+        }
+    });
+}
