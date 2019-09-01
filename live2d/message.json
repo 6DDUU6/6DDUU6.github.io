@@ -1,7 +1,7 @@
 {
     "mouseover": [
         {
-            "selector": ".title a",
+            "selector": ".menu a[href^='https']",
             "text": ["要看看 {text} 么？"]
         },
         {
