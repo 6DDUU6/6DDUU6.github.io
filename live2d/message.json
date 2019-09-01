@@ -2,10 +2,10 @@
     "mouseover": [
         {
             "selector": ".menu a[href^='https']",
-            "text": ["要看看 {text} 么？"]
+            "text": ["要看看  <span style=\"color:#0099cc;\">{text}</span> 么？"]
         },
         {
-            "selector": ".searchbox",
+            "selector": ".mneu",
             "text": ["在找什么东西呢，需要帮忙吗？"]
         }
     ],
