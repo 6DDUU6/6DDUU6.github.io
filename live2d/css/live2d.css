@@ -73,6 +73,15 @@
     color: #34495e;
 }
 
+.waifu #live2d{
+    position: relative;
+    cursor: grab;
+}
+
+.waifu #live2d:active {
+    cursor: grabbing;
+}
+
 .nv {
     display: none;
     color: #aaa;
